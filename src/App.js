@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+/* ORIGINAL */
+import { Grid, Article, Box } from "./appStyles";
+import { accounts } from "./accounts";
+
+const Account = ({ account }) => {
+  console.log("account", account);
+  return (
+    <Article>
+      <h1>
+        {account.acctName} (x{account.acctNumber})
+      </h1>
+      <Box />
+      <p>
+        This is the best computer money can buy, if you don’t have much money.
+      </p>
+    </Article>
+  );
+};
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Grid>
+      {accounts.map((a) => (
+        <Account account={a} />
+      ))}
+    </Grid>
   );
 }
 
