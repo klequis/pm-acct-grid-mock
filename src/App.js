@@ -1,6 +1,6 @@
 /* ORIGINAL */
 import { useState } from "react";
-import { Grid, Article, Box } from "./appStyles";
+import { Grid, Article } from "./styles";
 import { accounts } from "./accounts";
 import { useDropzone } from "react-dropzone";
 import * as R from "ramda";
@@ -9,7 +9,6 @@ import { groupFiles } from "./groupFiles";
 import { customFileGetter } from "./customFileGetter";
 
 const Account = ({ account, getRootProps, getInputProps }) => {
-  console.log("account", account);
   return (
     <Article>
       <h1>
@@ -29,14 +28,10 @@ const Account = ({ account, getRootProps, getInputProps }) => {
 
 function App() {
   const [_files, _setFiles] = useState({ accepted: [], rejected: [] });
-  const _onDrop = (acceptedFiles) => {
-    // one -->
-    // _setFiles(groupFiles(acceptedFiles))
-    // <--
 
+  const _onDrop = (acceptedFiles) => {
+    console.log("_onDrop");
     const { accepted, rejected } = groupFiles(acceptedFiles);
-    // console.log('accepted', accepted)
-    // console.log('_files.accepted', _files.accepted)
     _setFiles({
       accepted: R.flatten([accepted, _files.accepted]),
       rejected: R.flatten([rejected, _files.rejected]),
@@ -48,10 +43,12 @@ function App() {
     getFilesFromEvent: (event) => customFileGetter(event),
   });
 
+  console.log("_files", _files);
   return (
     <Grid>
       {accounts.map((a) => (
         <Account
+          key={a.acctId}
           account={a}
           getRootProps={getRootProps}
           getInputProps={getInputProps}

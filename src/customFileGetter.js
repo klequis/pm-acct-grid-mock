@@ -5,6 +5,7 @@ import * as R from "ramda";
  * @returns {object} a File object
  */
 const updateAcceptProp = (file) => {
+  // console.log("file", file);
   const filename = file.name;
   const ext = filename.substr(filename.lastIndexOf(".") + 1);
 
@@ -20,7 +21,7 @@ const updateAcceptProp = (file) => {
  * @returns {Array} array of accepted files
  */
 export async function customFileGetter(event) {
-  // console.log('event', event)
+  console.log("event", event);
   const fileList = event.dataTransfer
     ? event.dataTransfer.files
     : event.target.files;
