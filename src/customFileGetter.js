@@ -21,7 +21,8 @@ const updateAcceptProp = (file) => {
  * @returns {Array} array of accepted files
  */
 export async function customFileGetter(event) {
-  console.log("event", event);
+  console.log("event", event.target);
+
   const fileList = event.dataTransfer
     ? event.dataTransfer.files
     : event.target.files;

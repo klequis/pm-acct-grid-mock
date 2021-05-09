@@ -40,7 +40,7 @@ function App() {
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop: _onDrop,
-    getFilesFromEvent: (event) => customFileGetter(event),
+    getFilesFromEvent: (event) => customFileGetter(event, "1234"),
   });
 
   console.log("_files", _files);

@@ -6,12 +6,8 @@ export const DropZone = ({ getRootProps, getInputProps, account }) => {
   console.log("getInputProps", { ...getInputProps() });
   const _dropRef = useRef();
   return (
-    <DropDiv
-      id="DropDiv1"
-      {...getRootProps({ acctId: account.acctId })}
-      ref={_dropRef}
-    >
-      <input {...getInputProps()} />
+    <DropDiv id="DropDiv1" {...getRootProps()} ref={_dropRef}>
+      <input {...getInputProps({ acctid: account.acctId })} />
 
       <DropMsgDiv>Drop files here or click to use dialog.</DropMsgDiv>
       <OnlyCSVWarn>
