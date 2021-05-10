@@ -1,25 +1,15 @@
-import { useState } from "react";
-import { Grid } from "./styles";
 import { accounts } from "./accounts";
-import Account from "./Account";
+import { Grid } from "./styles";
+import DropZone from "./DropZone";
 
-function App() {
-  const [_files, _setFiles] = useState({ accepted: [], rejected: [] });
-
-  console.log(`_files`, _files);
-
+const App = (props) => {
   return (
     <Grid>
       {accounts.map((a) => (
-        <Account
-          key={a.acctId}
-          account={a}
-          files={_files}
-          setFiles={_setFiles}
-        />
+        <DropZone key={a.acctId} account={a} />
       ))}
     </Grid>
   );
-}
+};
 
 export default App;
