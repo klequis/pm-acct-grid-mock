@@ -68,17 +68,11 @@ const Account = ({ account, files, setFiles }) => {
   // console.log(`files ${account.acctId}`, files);
   return (
     <Article>
-      <h1>
-        {account.acctName} (x{account.acctNumber})
-      </h1>
       <DropZone
         getRootProps={getRootProps}
         getInputProps={getInputProps}
         account={account}
       />
-      <p>
-        This is the best computer money can buy, if you don’t have much money.
-      </p>
     </Article>
   );
 };

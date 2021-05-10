@@ -6,8 +6,12 @@ export const DropZone = ({ getRootProps, getInputProps, account }) => {
   return (
     <DropDiv id="DropDiv1" {...getRootProps()} ref={_dropRef}>
       <input {...getInputProps()} />
-      <div>Drag & Drop or click to add files for account</div>
-      <div>{account.acctName}</div>
+      <div style={{ textAlign: "center" }}>
+        Drag & Drop or click to add files for account
+      </div>
+      <div style={{ fontSize: "1.2em", fontWeight: "bold" }}>
+        {account.acctName}
+      </div>
       <div>x{account.acctNumber}</div>
     </DropDiv>
   );
