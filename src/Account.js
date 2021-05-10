@@ -52,7 +52,7 @@ const Account = ({ account, files, setFiles }) => {
     isDragReject,
   } = useDropzone({
     onDrop: _onDrop,
-    getFilesFromEvent: (event) => customFileGetter(event, "1234"),
+    getFilesFromEvent: (event) => customFileGetter(event, account.acctId),
   });
 
   const style = useMemo(
