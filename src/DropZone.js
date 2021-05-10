@@ -46,12 +46,12 @@ const DropZone = ({ account }) => {
     // console.log("effect", "called");
     console.log("_acceptedFiles", _acceptedFiles);
     console.log("acceptedFiles", acceptedFiles);
-    if (acceptedFiles.length > 0) {
-      const newFiles = R.concat(acceptedFiles, _acceptedFiles);
-      _setAcceptedFiles(newFiles);
-      console.log("newFiles", newFiles);
-    }
-
+    // if (acceptedFiles.length > 0) {
+    const newFiles = R.concat(acceptedFiles, _acceptedFiles);
+    _setAcceptedFiles(newFiles);
+    console.log("newFiles", newFiles);
+    // }/
+    console.log();
     // _setAcceptedFiles();
   }, [acceptedFiles]);
 
@@ -85,7 +85,7 @@ const DropZone = ({ account }) => {
         <p>Drag 'n' drop some files here, or click to select files</p>
         <em>(Only files with name less than 20 characters will be accepted)</em>
       </Container>
-      {/* <aside>
+      <aside>
         <h4>Accepted files</h4>
         <ul>
           {_acceptedFiles.map((f) => {
@@ -96,9 +96,9 @@ const DropZone = ({ account }) => {
             );
           })}
         </ul>
-        <h4>Rejected files</h4>
-        <ul>{fileRejectionItems}</ul>
-      </aside> */}
+        {/* <h4>Rejected files</h4>
+        <ul>{fileRejectionItems}</ul> */}
+      </aside>
     </Article>
   );
 };
