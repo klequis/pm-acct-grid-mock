@@ -1,21 +1,43 @@
-import { useRef } from "react";
-import { DropDiv, DropMsgDiv, OnlyCSVWarn } from "./styles";
+import { useRef } from 'react'
+// import { DropDiv, DropMsgDiv, OnlyCSVWarn } from "./styles";
+import styled from 'styled-components'
+import { Area } from './components/Area'
 
+const DropZoneDiv = styled.div`
+  text-align: center;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 20px 0;
+  margin-bottom: 20px;
+`
+
+export const DropZone = ({ children }) => {
+  return (
+    <Area>
+      <DropZoneDiv>{children}</DropZoneDiv>
+    </Area>
+  )
+}
+
+/*
 export const DropZone = ({ getRootProps, getInputProps, account }) => {
   const _dropRef = useRef();
   return (
-    <DropDiv id="DropDiv1" {...getRootProps()} ref={_dropRef}>
+    <div
+      // style={{ backgroundColor: "green", padding: 5 }}
+      // className="card bg-primary"
+      id="DropDiv1"
+      {...getRootProps()}
+      ref={_dropRef}
+    >
       <input {...getInputProps()} />
-      <div style={{ textAlign: "center" }}>
-        Drag & Drop or click to add files for account
-      </div>
-      <div style={{ fontSize: "1.2em", fontWeight: "bold" }}>
-        {account.acctName}
-      </div>
-      <div>x{account.acctNumber}</div>
-    </DropDiv>
+    </div>
   );
 };
+
+*/
 
 /*
 
