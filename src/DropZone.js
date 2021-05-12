@@ -1,7 +1,8 @@
 import { useRef } from 'react'
-// import { DropDiv, DropMsgDiv, OnlyCSVWarn } from "./styles";
 import styled from 'styled-components'
 import { Area } from './components/Area'
+import { CardTitle } from 'components/CardTitle'
+import { CardText } from 'components/CardText'
 
 const DropZoneDiv = styled.div`
   text-align: center;
@@ -13,10 +14,15 @@ const DropZoneDiv = styled.div`
   margin-bottom: 20px;
 `
 
-export const DropZone = ({ children }) => {
+export const DropZone = ({ getRootProps, getInputProps, account }) => {
+  const _dropRef = useRef()
   return (
     <Area>
-      <DropZoneDiv>{children}</DropZoneDiv>
+      <DropZoneDiv {...getRootProps()} ref={_dropRef}>
+        <input {...getInputProps()} />
+        <CardTitle>{account.acctName}</CardTitle>
+        <CardText>Only CSV files are accepted.</CardText>
+      </DropZoneDiv>
     </Area>
   )
 }
