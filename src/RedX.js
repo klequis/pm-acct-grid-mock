@@ -5,7 +5,6 @@ export const RedX = ({ color = '#e74c3c' }) => {
       width="16"
       height="16"
       fill="currentColor"
-      class="bi bi-x-square-fill"
       viewBox="0 0 16 16"
       version="1.1"
       id="svg4"
