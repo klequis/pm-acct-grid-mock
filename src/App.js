@@ -1,49 +1,49 @@
-import { useState } from 'react'
-import { Grid } from 'components/Grid'
-import { accounts } from './accounts'
-import { Account } from 'Account'
-import * as R from 'ramda'
-function App() {
-  // const [_files, _setFiles] = useState({ accepted: [], rejected: [] })
-  const [_fileList, _setFileList] = useState([])
+import React from 'react'
+import { FileDrop } from 'react-file-drop'
+import './Demo.css'
 
-  const _addFiles = (file) => {
-    _setFileList(R.concat(file, _fileList))
+const App = () => {
+  const styles = {
+    border: '1px solid black',
+    width: 600,
+    color: 'black',
+    padding: 20
   }
-
-  console.log(`_files`, _fileList)
-
+  console.log('React', React)
   return (
-    <Grid>
-      {accounts.map((a) => (
-        <Account
-          key={a.acctId}
-          account={a}
-          files={_fileList}
-          addFiles={_addFiles}
-        />
-      ))}
-    </Grid>
+    <div>
+      <div>
+        <h1>React File Drop demo</h1>
+        <div style={styles}>
+          <FileDrop
+            // onFrameDragEnter={(event) => console.log('onFrameDragEnter', event)}
+            // onFrameDragLeave={(event) => console.log('onFrameDragLeave', event)}
+            // onFrameDrop={(event) => console.log('onFrameDrop', event)}
+            // onDragOver={(event) => console.log('onDragOver', event)}
+            // onDragLeave={(event) => console.log('onDragLeave', event)}
+            onDrop={(files, event) => console.log('onDrop!', files, event)}
+          >
+            Drop some files here!
+          </FileDrop>
+        </div>
+      </div>
+      <div>
+        <h1>React File Drop demo</h1>
+        <div style={styles}>
+          <FileDrop
+            // onFrameDragEnter={(event) => console.log('onFrameDragEnter', event)}
+            // onFrameDragLeave={(event) => console.log('onFrameDragLeave', event)}
+            // onFrameDrop={(event) => console.log('onFrameDrop', event)}
+            // onDragOver={(event) => console.log('onDragOver', event)}
+            // onDragLeave={(event) => console.log('onDragLeave', event)}
+            onDrop={(files, event) => console.log('onDrop!', files, event)}
+          >
+            Drop some files here!
+          </FileDrop>
+        </div>
+      </div>
+    </div>
   )
 }
 
 export default App
-
-/*
-
-<div>
-      <div className="card">
-        <div className="card-body"></div>
-      </div>
-      <Grid>
-        {accounts.map((a) => (
-          <Account
-            key={a.acctId}
-            account={a}
-            files={_files}
-            setFiles={_setFiles}
-          />
-        ))}
-      </Grid>
-    </div>
-*/
