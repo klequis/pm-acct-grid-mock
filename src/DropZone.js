@@ -18,7 +18,11 @@ const fileExtensionValidator = (file) => {
   };
 };
 
-const getBackgroundColor = (props) => (props.isDragActive ? "green" : "gray");
+// const getBackgroundColor = (props) => (props.isDragActive ? "green" : "gray");
+const getBackgroundColor = (props) => {
+  console.log("props", props);
+  return props.isDragActive ? "green" : "gray";
+};
 
 const Container = styled.div`
   height: 200px;
@@ -36,8 +40,13 @@ const DropZone = ({ account }) => {
     getRootProps,
     getInputProps,
     isDragActive,
+    isDragAccept,
+    isFocused,
+    draggedFiles,
+    isDragReject,
   } = useDropzone({
     validator: fileExtensionValidator,
+    accept: ".jpeg,.png",
   });
 
   // s
@@ -55,23 +64,6 @@ const DropZone = ({ account }) => {
     // _setAcceptedFiles();
   }, [acceptedFiles]);
 
-  // const fileRejectionItems = fileRejections.map(({ file, errors }) => {
-  //   _setRejectedFiles({
-  //     file,
-  //     errors,
-  //   });
-  //   return (
-  //     <li key={file.path}>
-  //       {file.path} - {file.size} bytes
-  //       <ul>
-  //         {errors.map((e) => (
-  //           <li key={e.code}>{e.message}</li>
-  //         ))}
-  //       </ul>
-  //     </li>
-  //   );
-  // });
-
   console.log("_acceptedFiles", _acceptedFiles);
   // console.log("acceptedFiles", acceptedFiles);
 
@@ -84,6 +76,9 @@ const DropZone = ({ account }) => {
         <input {...getInputProps()} />
         <p>Drag 'n' drop some files here, or click to select files</p>
         <em>(Only files with name less than 20 characters will be accepted)</em>
+        {isDragAccept && <p>All files will be accepted</p>}
+        {isDragReject && <p>Some files will be rejected</p>}
+        {!isDragActive && <p>Drop some files here ...</p>}
       </Container>
       <aside>
         <h4>Accepted files</h4>
