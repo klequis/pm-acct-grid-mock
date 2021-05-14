@@ -1,11 +1,11 @@
-import { DropZone } from 'DropZone'
+import { DropZone } from './DropZone'
 import { useDropzone } from 'react-dropzone'
 import { customFileGetter } from './customFileGetter'
 import * as R from 'ramda'
 import { Card } from 'components/Card'
 import { CardBody } from 'components/CardBody'
-import { Files } from 'components/Files'
-import { File } from 'components/File'
+import { Files } from './Files'
+import { File } from './File'
 import { nanoid } from 'nanoid'
 
 const filterFiles = (files, acctId) => {
@@ -17,7 +17,7 @@ const filterFiles = (files, acctId) => {
   }, [])
 }
 
-export const Account = ({ account, files = [], addFiles }) => {
+export const AccountDropzone = ({ account, files = [], addFiles }) => {
   const _onDrop = (acceptedFiles) => {
     console.log('_onDrop: acceptedFiles', acceptedFiles)
     addFiles(acceptedFiles) // `addFiles` does a concat

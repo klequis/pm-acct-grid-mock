@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import styled from 'styled-components'
-import { Area } from './components/Area'
+import { Area } from 'components/Area'
 import { CardTitle } from 'components/CardTitle'
 import { CardText } from 'components/CardText'
 

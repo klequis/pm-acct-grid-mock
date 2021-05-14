@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 // import { CheckSquareFill, XSquareFill } from 'react-bootstrap-icons'
-import { RedX } from 'RedX'
-import { GreenCheck } from 'GreenCheck'
+import { RedX } from './RedX'
+import { GreenCheck } from './GreenCheck'
 import { getFileBaseName } from 'lib/getFileBaseName'
 
 const FileContainerDiv = styled.div`

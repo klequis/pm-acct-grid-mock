@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Grid } from 'components/Grid'
 import { accounts } from './accounts'
-import { Account } from 'Account'
+import { AccountDropzone } from 'AccountDropzone'
 import * as R from 'ramda'
 
 export const App = () => {
@@ -14,7 +14,7 @@ export const App = () => {
   return (
     <Grid>
       {accounts.map((a) => (
-        <Account
+        <AccountDropzone
           key={a.acctId}
           account={a}
           files={_fileList}

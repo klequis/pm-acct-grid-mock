@@ -1,6 +1,5 @@
 import * as R from 'ramda'
 import { getFileExtension } from 'lib/getFileExtension'
-import { getFileBaseName } from 'lib/getFileBaseName'
 
 const addDefinedProperty = (propName, propValue, obj) => {
   Object.defineProperty(obj, propName, {
@@ -8,14 +7,6 @@ const addDefinedProperty = (propName, propValue, obj) => {
   })
   return obj
 }
-
-// const checkForDuplicateFiles = (newFiles, currentFiles) => {
-//   const curFileNames = currentFiles.map((f) => f.name)
-//   return newFiles.map((f) => {
-//     const isDuplicate = R.any(R.equals(R.__, f.name), curFileNames)
-//     return addDefinedProperty('duplicate', isDuplicate, f)
-//   })
-// }
 
 const isDuplicate = (fileName, currentFileNames) =>
   R.any(R.equals(R.__, fileName), currentFileNames)
