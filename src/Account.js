@@ -17,13 +17,6 @@ const filterFiles = (files, acctId) => {
   }, [])
 }
 
-const addDuplicateProp = (file, duplicate) => {
-  Object.defineProperty(file, 'duplicate', {
-    value: duplicate
-  })
-  return file
-}
-
 export const Account = ({ account, files = [], addFiles }) => {
   const _onDrop = (acceptedFiles) => {
     console.log('_onDrop: acceptedFiles', acceptedFiles)

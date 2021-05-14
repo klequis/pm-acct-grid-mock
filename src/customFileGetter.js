@@ -28,13 +28,12 @@ const isDuplicate = (fileName, currentFileNames) =>
  * @returns {Array} array of accepted files
  */
 export async function customFileGetter(event, acctId, currentFiles) {
+  console.log('event', event)
   console.log('files', currentFiles)
   const currentFileNames = currentFiles.map((f) => f.name)
 
   const addProps = (file) => {
-    console.log('file', file)
     const { name } = file
-    console.log('name', name)
     const extension = getFileExtension(name)
     addDefinedProperty('extension', extension, file)
     const isCSVExtension = extension.toLowerCase() === 'csv'
@@ -42,11 +41,12 @@ export async function customFileGetter(event, acctId, currentFiles) {
     addDefinedProperty('acctId', acctId, file)
     const isDup = isDuplicate(name, currentFileNames)
     addDefinedProperty('duplicate', isDup, file)
+    addDefinedProperty('accepted', isCSVExtension && !isDup, file)
     return file
   }
 
   const fileList = event.dataTransfer
     ? event.dataTransfer.files
     : event.target.files
-  return R.map(R.pipe(addProps)(fileList))
+  return R.map(addProps)(fileList)
 }
