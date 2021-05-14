@@ -12,35 +12,18 @@ const App = () => {
   console.log('React', React)
   return (
     <div>
-      <div>
-        <h1>React File Drop demo</h1>
-        <div style={styles}>
-          <FileDrop
-            // onFrameDragEnter={(event) => console.log('onFrameDragEnter', event)}
-            // onFrameDragLeave={(event) => console.log('onFrameDragLeave', event)}
-            // onFrameDrop={(event) => console.log('onFrameDrop', event)}
-            // onDragOver={(event) => console.log('onDragOver', event)}
-            // onDragLeave={(event) => console.log('onDragLeave', event)}
-            onDrop={(files, event) => console.log('onDrop!', files, event)}
-          >
-            Drop some files here!
-          </FileDrop>
-        </div>
-      </div>
-      <div>
-        <h1>React File Drop demo</h1>
-        <div style={styles}>
-          <FileDrop
-            // onFrameDragEnter={(event) => console.log('onFrameDragEnter', event)}
-            // onFrameDragLeave={(event) => console.log('onFrameDragLeave', event)}
-            // onFrameDrop={(event) => console.log('onFrameDrop', event)}
-            // onDragOver={(event) => console.log('onDragOver', event)}
-            // onDragLeave={(event) => console.log('onDragLeave', event)}
-            onDrop={(files, event) => console.log('onDrop!', files, event)}
-          >
-            Drop some files here!
-          </FileDrop>
-        </div>
+      <h1>React File Drop demo</h1>
+      <div style={styles}>
+        <FileDrop
+          // onFrameDragEnter={(event) => console.log('onFrameDragEnter', event)}
+          // onFrameDragLeave={(event) => console.log('onFrameDragLeave', event)}
+          // onFrameDrop={(event) => console.log('onFrameDrop', event)}
+          onDragOver={(event) => console.log('onDragOver', event)}
+          // onDragLeave={(event) => console.log('onDragLeave', event)}
+          // onDrop={(files, event) => console.log('onDrop!', files, event)}
+        >
+          Drop some files here!
+        </FileDrop>
       </div>
     </div>
   )
