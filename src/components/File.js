@@ -2,6 +2,7 @@ import styled from 'styled-components'
 // import { CheckSquareFill, XSquareFill } from 'react-bootstrap-icons'
 import { RedX } from 'RedX'
 import { GreenCheck } from 'GreenCheck'
+import { getFileBaseName } from 'lib/getFileBaseName'
 
 const FileContainerDiv = styled.div`
   display: flex;
@@ -25,14 +26,16 @@ const FileNameExtension = styled.span`
   padding: 0 0 1px 0;
 `
 
-const FileAccepted = ({ fileName, extension }) => {
+const FileAccepted = ({ file }) => {
+  const { name, extension } = file
+  const baseFileName = getFileBaseName(name)
   return (
     <FileContainerDiv id="Container">
       <FileName id="FileName">
         <GreenCheck />
-        <FileNameBase id="FileNameBase">{fileName}</FileNameBase>
+        <FileNameBase id="FileNameBase">{baseFileName}</FileNameBase>
         <FileNameExtension id="FileNameExtension">
-          {extension}
+          .{extension}
         </FileNameExtension>
       </FileName>
     </FileContainerDiv>
@@ -45,32 +48,38 @@ const RejectMsgSpan = styled.span`
 `
 
 const RejectMessage = ({ file }) => {
-  if (!file.accepted) {
+  const { duplicate, hasCSVExtension } = file
+  if (!hasCSVExtension) {
+    return 'File must have a .csv extension'
+  } else if (duplicate) {
+    return 'Duplicate file.'
+  } else {
+    return 'Unknown file error.'
   }
 }
 
 const FileRejected = ({ file }) => {
-  const { name, duplicate, extension } = file
+  const { name, extension } = file
+  const baseFileName = getFileBaseName(name)
   return (
     <div>
       <FileContainerDiv id="Container">
         <FileName id="FileName">
           <RedX />
-          <FileNameBase id="FileNameBase">{name}</FileNameBase>
+          <FileNameBase id="FileNameBase">{baseFileName}</FileNameBase>
           <FileNameExtension id="FileNameExtension">
-            {extension}
+            .{extension}
           </FileNameExtension>
         </FileName>
       </FileContainerDiv>
-      <RejectMsgSpan></RejectMsgSpan>
+      <RejectMsgSpan>
+        <RejectMessage file={file} />
+      </RejectMsgSpan>
     </div>
   )
 }
 
 export const File = ({ file }) => {
-  return file.accepted && !file.duplicate ? (
-    <FileAccepted file={file} />
-  ) : (
-    <FileRejected file={file} />
-  )
+  const { accepted } = file
+  return accepted ? <FileAccepted file={file} /> : <FileRejected file={file} />
 }
