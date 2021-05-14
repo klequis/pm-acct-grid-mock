@@ -1,14 +1,26 @@
-import { accounts } from "./accounts";
-import { Grid } from "./styles";
-import DropZone from "./DropZone";
+import React from "react";
+import { useDropzone } from "react-dropzone";
 
 const App = (props) => {
+  const {
+    getRootProps,
+    getInputProps,
+    isDragActive,
+    isDragAccept,
+    isDragReject,
+  } = useDropzone({
+    accept: ".jpeg,.png",
+  });
+
   return (
-    <Grid>
-      {accounts.map((a) => (
-        <DropZone key={a.acctId} account={a} />
-      ))}
-    </Grid>
+    <div className="container">
+      <div {...getRootProps({ className: "dropzone" })}>
+        <input {...getInputProps()} />
+        {isDragAccept && <p>All files will be accepted</p>}
+        {isDragReject && <p>Some files will be rejected</p>}
+        {!isDragActive && <p>Drop some files here ...</p>}
+      </div>
+    </div>
   );
 };
 
