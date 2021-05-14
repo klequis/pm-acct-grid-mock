@@ -2,8 +2,6 @@ import styled from 'styled-components'
 // import { CheckSquareFill, XSquareFill } from 'react-bootstrap-icons'
 import { RedX } from 'RedX'
 import { GreenCheck } from 'GreenCheck'
-import { getFileName } from 'lib/getFileName'
-import { getFileExtension } from 'lib/getFileExtension'
 
 const FileContainerDiv = styled.div`
   display: flex;
@@ -27,13 +25,15 @@ const FileNameExtension = styled.span`
   padding: 0 0 1px 0;
 `
 
-const FileAccepted = ({ fileName, fileExt }) => {
+const FileAccepted = ({ fileName, extension }) => {
   return (
     <FileContainerDiv id="Container">
       <FileName id="FileName">
         <GreenCheck />
         <FileNameBase id="FileNameBase">{fileName}</FileNameBase>
-        <FileNameExtension id="FileNameExtension">{fileExt}</FileNameExtension>
+        <FileNameExtension id="FileNameExtension">
+          {extension}
+        </FileNameExtension>
       </FileName>
     </FileContainerDiv>
   )
@@ -50,15 +50,15 @@ const RejectMessage = ({ file }) => {
 }
 
 const FileRejected = ({ file }) => {
-  const { fileName, fileExt, accepted, duplicate } = file
+  const { name, duplicate, extension } = file
   return (
     <div>
       <FileContainerDiv id="Container">
         <FileName id="FileName">
           <RedX />
-          <FileNameBase id="FileNameBase">{fileName}</FileNameBase>
+          <FileNameBase id="FileNameBase">{name}</FileNameBase>
           <FileNameExtension id="FileNameExtension">
-            {fileExt}
+            {extension}
           </FileNameExtension>
         </FileName>
       </FileContainerDiv>
@@ -68,11 +68,9 @@ const FileRejected = ({ file }) => {
 }
 
 export const File = ({ file }) => {
-  const fileName = getFileName(file.name)
-  const fileExt = `.${getFileExtension(file.name)}`
   return file.accepted && !file.duplicate ? (
-    <FileAccepted fileName={fileName} fileExt={fileExt} />
+    <FileAccepted file={file} />
   ) : (
-    <FileRejected fileName={fileName} fileExt={fileExt} />
+    <FileRejected file={file} />
   )
 }

@@ -1,5 +1,4 @@
 import { DropZone } from 'DropZone'
-import { groupFiles } from './groupFiles'
 import { useDropzone } from 'react-dropzone'
 import { customFileGetter } from './customFileGetter'
 import * as R from 'ramda'
@@ -25,36 +24,17 @@ const addDuplicateProp = (file, duplicate) => {
   return file
 }
 
-const checkForDuplicateFiles = (newFiles, currentFiles) => {
-  const curFileNames = currentFiles.map((f) => f.name)
-  return newFiles.map((f) => {
-    const isDuplicate = R.any(R.equals(R.__, f.name), curFileNames)
-    return addDuplicateProp(f, isDuplicate)
-  })
-}
-
 export const Account = ({ account, files = [], addFiles }) => {
   const _onDrop = (acceptedFiles) => {
-    // const { accepted, rejected } = groupFiles(acceptedFiles)
-    // setFiles({
-    //   accepted: R.flatten([accepted, files.accepted]),
-    //   rejected: R.flatten([rejected, files.rejected])
-    // })
-
-    const checkedFiles = checkForDuplicateFiles(acceptedFiles, files)
-    console.log('checkedFiles', checkedFiles)
-    addFiles(acceptedFiles)
+    console.log('_onDrop: acceptedFiles', acceptedFiles)
+    addFiles(acceptedFiles) // `addFiles` does a concat
   }
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop: _onDrop,
 
-    getFilesFromEvent: (event) => customFileGetter(event, account.acctId)
+    getFilesFromEvent: (event) => customFileGetter(event, account.acctId, files)
   })
-
-  // const a = filterFiles(files, account.acctId)
-  // console.log('files', files)
-  // console.log('a', a)
 
   return (
     <Card>
@@ -66,15 +46,7 @@ export const Account = ({ account, files = [], addFiles }) => {
         />
         <Files>
           {filterFiles(files, account.acctId).map((file) => (
-            <File
-              key={file.duplicate ? nanoid() : file.name}
-              // key={nanoid()}
-              // file={{
-              //   name: 'this-is-a-very-long-file-name-wow-that-is-long.txt',
-              //   accepted: false
-              // }}
-              file={file}
-            />
+            <File key={file.duplicate ? nanoid() : file.name} file={file} />
           ))}
         </Files>
       </CardBody>

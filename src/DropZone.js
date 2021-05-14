@@ -26,30 +26,3 @@ export const DropZone = ({ getRootProps, getInputProps, account }) => {
     </Area>
   )
 }
-
-/*
-export const DropZone = ({ getRootProps, getInputProps, account }) => {
-  const _dropRef = useRef();
-  return (
-    <div
-      // style={{ backgroundColor: "green", padding: 5 }}
-      // className="card bg-primary"
-      id="DropDiv1"
-      {...getRootProps()}
-      ref={_dropRef}
-    >
-      <input {...getInputProps()} />
-    </div>
-  );
-};
-
-*/
-
-/*
-
-<DropMsgDiv>Drop files here or click to use dialog.</DropMsgDiv>
-      <OnlyCSVWarn>
-        <i>Only CSV files are accepted.</i>
-      </OnlyCSVWarn>
-
-      */

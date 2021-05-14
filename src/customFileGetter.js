@@ -1,58 +1,52 @@
 import * as R from 'ramda'
-/**
- *
- * @param {object} file a File object
- * @returns {object} a File object
- */
-const updateAcceptedProp = (file) => {
-  console.log('file', file)
-  const filename = file.name
-  const ext = filename.substr(filename.lastIndexOf('.') + 1)
+import { getFileExtension } from 'lib/getFileExtension'
+import { getFileBaseName } from 'lib/getFileBaseName'
 
-  Object.defineProperty(file, 'accepted', {
-    value: ext.toUpperCase() === 'CSV' ? true : false
+const addDefinedProperty = (propName, propValue, obj) => {
+  Object.defineProperty(obj, propName, {
+    value: propValue
   })
-  return file
+  return obj
 }
 
-const addExtensionProp = (file) => {
-  const filename = file.name
-  const ext = filename.substr(filename.lastIndexOf('.') + 1)
+// const checkForDuplicateFiles = (newFiles, currentFiles) => {
+//   const curFileNames = currentFiles.map((f) => f.name)
+//   return newFiles.map((f) => {
+//     const isDuplicate = R.any(R.equals(R.__, f.name), curFileNames)
+//     return addDefinedProperty('duplicate', isDuplicate, f)
+//   })
+// }
 
-  Object.defineProperty(file, 'extension', {
-    value: ext.toLowerCase()
-  })
-  return file
-}
+const isDuplicate = (fileName, currentFileNames) =>
+  R.any(R.equals(R.__, fileName), currentFileNames)
 
 /**
  *
  * @param {event} event fileDrop event
  * @param {string} acctId the account id the files were added to
+ * @param {Array} currentFiles list of files from all previous drops
  * @returns {Array} array of accepted files
  */
-export async function customFileGetter(event, acctId) {
-  // console.log('event', event)
-  // console.log("acctId", acctId);
+export async function customFileGetter(event, acctId, currentFiles) {
+  console.log('files', currentFiles)
+  const currentFileNames = currentFiles.map((f) => f.name)
 
-  const updateAcctIdProp = (file) => {
-    Object.defineProperty(file, 'acctId', {
-      value: acctId
-    })
+  const addProps = (file) => {
+    console.log('file', file)
+    const { name } = file
+    console.log('name', name)
+    const extension = getFileExtension(name)
+    addDefinedProperty('extension', extension, file)
+    const isCSVExtension = extension.toLowerCase() === 'csv'
+    addDefinedProperty('hasCSVExtension', isCSVExtension, file)
+    addDefinedProperty('acctId', acctId, file)
+    const isDup = isDuplicate(name, currentFileNames)
+    addDefinedProperty('duplicate', isDup, file)
     return file
   }
-
-  const addProps = R.pipe(
-    updateAcceptedProp,
-    updateAcctIdProp,
-    addExtensionProp
-  )
 
   const fileList = event.dataTransfer
     ? event.dataTransfer.files
     : event.target.files
-  // console.log("fileList", fileList);
-  return R.map(addProps)(fileList)
-
-  // return R.map(R.pipe(updateAcceptProp, updateAcctIdProp), fileList);
+  return R.map(R.pipe(addProps)(fileList))
 }
