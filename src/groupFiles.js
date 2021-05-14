@@ -1,7 +1,7 @@
-import * as R from "ramda";
+import * as R from 'ramda'
 
 export const groupFiles = (files) => {
-  const g = R.groupBy((f) => (f.accept ? "accepted" : "rejected"))(files);
+  const g = R.groupBy((f) => (f.accepted ? 'accepted' : 'rejected'))(files)
   // const { accepted, rejected } = g
   // console.group('groupFiles')
   // // _l('g', g)
@@ -14,7 +14,7 @@ export const groupFiles = (files) => {
   // console.groupEnd()
 
   return {
-    accepted: R.has("accepted")(g) ? g.accepted : [],
-    rejected: R.has("rejected")(g) ? g.rejected : [],
-  };
-};
+    accepted: R.has('accepted')(g) ? g.accepted : [],
+    rejected: R.has('rejected')(g) ? g.rejected : []
+  }
+}

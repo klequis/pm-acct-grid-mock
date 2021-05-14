@@ -4,13 +4,23 @@ import * as R from 'ramda'
  * @param {object} file a File object
  * @returns {object} a File object
  */
-const updateAcceptProp = (file) => {
-  // console.log("file", file);
+const updateAcceptedProp = (file) => {
+  console.log('file', file)
   const filename = file.name
   const ext = filename.substr(filename.lastIndexOf('.') + 1)
 
-  Object.defineProperty(file, 'accept', {
+  Object.defineProperty(file, 'accepted', {
     value: ext.toUpperCase() === 'CSV' ? true : false
+  })
+  return file
+}
+
+const addExtensionProp = (file) => {
+  const filename = file.name
+  const ext = filename.substr(filename.lastIndexOf('.') + 1)
+
+  Object.defineProperty(file, 'extension', {
+    value: ext.toLowerCase()
   })
   return file
 }
@@ -22,7 +32,7 @@ const updateAcceptProp = (file) => {
  * @returns {Array} array of accepted files
  */
 export async function customFileGetter(event, acctId) {
-  console.log('event', event)
+  // console.log('event', event)
   // console.log("acctId", acctId);
 
   const updateAcctIdProp = (file) => {
@@ -32,7 +42,11 @@ export async function customFileGetter(event, acctId) {
     return file
   }
 
-  const addProps = R.pipe(updateAcceptProp, updateAcctIdProp)
+  const addProps = R.pipe(
+    updateAcceptedProp,
+    updateAcctIdProp,
+    addExtensionProp
+  )
 
   const fileList = event.dataTransfer
     ? event.dataTransfer.files

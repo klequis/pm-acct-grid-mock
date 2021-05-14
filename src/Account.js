@@ -42,11 +42,13 @@ export const Account = ({ account, files = [], addFiles }) => {
     // })
 
     const checkedFiles = checkForDuplicateFiles(acceptedFiles, files)
+    console.log('checkedFiles', checkedFiles)
     addFiles(acceptedFiles)
   }
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop: _onDrop,
+
     getFilesFromEvent: (event) => customFileGetter(event, account.acctId)
   })
 

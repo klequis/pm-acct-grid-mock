@@ -11,7 +11,7 @@ function App() {
     _setFileList(R.concat(file, _fileList))
   }
 
-  console.log(`_files`, _fileList)
+  // console.log(`_files`, _fileList)
 
   return (
     <Grid>

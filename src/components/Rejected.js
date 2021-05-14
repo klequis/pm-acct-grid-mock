@@ -1,5 +1,5 @@
 export const Rejected = ({ children }) => {
-  console.log('children', children.length)
+  // console.log('children', children.length)
   return (
     <div>
       <h6>Rejected Files</h6>

@@ -44,7 +44,13 @@ const RejectMsgSpan = styled.span`
   color: red;
 `
 
-const FileRejected = ({ fileName, fileExt }) => {
+const RejectMessage = ({ file }) => {
+  if (!file.accepted) {
+  }
+}
+
+const FileRejected = ({ file }) => {
+  const { fileName, fileExt, accepted, duplicate } = file
   return (
     <div>
       <FileContainerDiv id="Container">
@@ -56,9 +62,7 @@ const FileRejected = ({ fileName, fileExt }) => {
           </FileNameExtension>
         </FileName>
       </FileContainerDiv>
-      <RejectMsgSpan>
-        <em>Some other text</em>
-      </RejectMsgSpan>
+      <RejectMsgSpan></RejectMsgSpan>
     </div>
   )
 }
@@ -66,7 +70,7 @@ const FileRejected = ({ fileName, fileExt }) => {
 export const File = ({ file }) => {
   const fileName = getFileName(file.name)
   const fileExt = `.${getFileExtension(file.name)}`
-  return file.accept ? (
+  return file.accepted && !file.duplicate ? (
     <FileAccepted fileName={fileName} fileExt={fileExt} />
   ) : (
     <FileRejected fileName={fileName} fileExt={fileExt} />

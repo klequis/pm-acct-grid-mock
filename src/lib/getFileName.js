@@ -1,5 +1,5 @@
 export const getFileName = (fullName) => {
-  console.log('fullName')
+  // console.log('fullName')
   const lastSlash = fullName.lastIndexOf('/')
   const lastDot = fullName.lastIndexOf('.')
 
