@@ -17,7 +17,7 @@ const DropZoneDiv = styled.div`
 export const DropZone = ({ getRootProps, getInputProps, account }) => {
   const _dropRef = useRef()
   return (
-    <Area>
+    <Area bgColor="danger">
       <DropZoneDiv {...getRootProps()} ref={_dropRef}>
         <input {...getInputProps()} />
         <CardTitle>{account.acctName}</CardTitle>

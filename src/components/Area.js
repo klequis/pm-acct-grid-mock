@@ -2,9 +2,8 @@ import { theme } from 'bootstrap/theme'
 import styled from 'styled-components'
 import * as R from 'ramda'
 
-const getColor = (bgColor) => {
-  return R.isNil(bgColor) ? theme.colors.primary : theme.colors[bgColor]
-}
+const getColor = (bgColor) =>
+  R.isNil(bgColor) ? theme.colors.primary : theme.colors[bgColor]
 
 const AreaDiv = styled.div`
   background-color: ${({ bgColor }) => getColor(bgColor)};
